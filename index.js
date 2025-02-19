@@ -4,6 +4,7 @@ let filteredPets = [];
 const showSpinner = () => {
     const spinnerContainer = document.getElementById("spinner-container");
     spinnerContainer.classList.remove("hidden");
+    spinnerContainer.classList.add("flex")
 };
 
 // Function to hide the spinner
