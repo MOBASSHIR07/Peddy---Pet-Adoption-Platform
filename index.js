@@ -1,5 +1,17 @@
 let filteredPets = [];
 
+// Function to show the spinner
+const showSpinner = () => {
+    const spinnerContainer = document.getElementById("spinner-container");
+    spinnerContainer.classList.remove("hidden");
+};
+
+// Function to hide the spinner
+const hideSpinner = () => {
+    const spinnerContainer = document.getElementById("spinner-container");
+    spinnerContainer.classList.add("hidden");
+};
+
 const loadCategories = ()=>{
     fetch("https://openapi.programming-hero.com/api/peddy/categories")
     .then(res=>res.json())
@@ -8,9 +20,20 @@ const loadCategories = ()=>{
     
 }
 const loadPetsByCategory = (category) => {
+    showSpinner(); // Show the spinner before fetching data
+
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
         .then(res => res.json())
-        .then(data => displayPets(data.data));
+        .then(data => {
+            setTimeout(() => {
+                displayPets(data.data); // Display pets after 3 sec
+                hideSpinner();
+            }, 2000);
+        })
+        .catch(err => {
+            console.error("Error fetching pets by category:", err);
+            hideSpinner(); // Hide spinner on error
+        });
 
     const allButtons = document.querySelectorAll('.btn-category');
     allButtons.forEach(btn => {
@@ -45,17 +68,28 @@ const displayCategories = (data) => {
     });
 }
 
-// Fetch pet data from API
+// Fetch and display all pets
 const loadPets = () => {
+    showSpinner(); // Show the spinner before fetching data
+
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
-        .then(res => res.json())
-        
-        .then(data => {
-            filteredPets = data.pets;
-            displayPets(filteredPets);
+        .then((res) => res.json())
+        .then((data) => {
+            allPets = data.pets; // Store all pets
+            filteredPets = allPets; // Initialize filteredPets with all pets
+
+            // Ensure spinner stays for exactly 3 seconds
+            setTimeout(() => {
+                displayPets(filteredPets); // Display pets after 3 sec
+                hideSpinner();
+            }, 2000);
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+            console.error("Error fetching all pets:", err);
+            hideSpinner(); // Hide spinner on error
+        });
 };
+
 // sort
 const sortByPrice = () => {
     // Sort pets by price in descending order
@@ -166,6 +200,7 @@ const startCountDown = (event) => {
 const displayPets = (pets) => {
     const petContainer = document.getElementById('pet-container');
     petContainer.innerHTML = ''; // Clear previous content
+    
 
     if (pets.length === 0) {
         petContainer.innerHTML = `

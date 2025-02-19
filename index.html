@@ -136,6 +136,9 @@
         <!-- Pet Cards Container -->
         <div id="pet-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
             <!-- Cards will be dynamically inserted here -->
+           
+              
+            
         </div>
 
         <!-- Right Sidebar (Like Container) -->
@@ -145,6 +148,12 @@
         </div>
     </div>
 </section>
+
+
+<!-- Spinner -->
+<div id="spinner-container" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <span class="loading loading-bars loading-lg"></span>
+</div>
 
 
 
@@ -208,13 +217,21 @@
     <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
     <script>
+
+
+
         function scrollToCards() {
             // Get the card-section element and scroll into view
             document.getElementById('card-section').scrollIntoView({
                 behavior: 'smooth'  // Smooth scroll
             });
         }
+       
+       
+        
     </script>
+    
+
     
 </body>
 </html>
