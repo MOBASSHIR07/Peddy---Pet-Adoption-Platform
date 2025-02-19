@@ -51,7 +51,7 @@
                 It is a long established fact that a reader will be distracted by the readable
                 <span>content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</span>
             </p>
-            <button class="btn bg-[#0E7A81] text-white py-3 px-6 sm:px-8 rounded-lg mt-6 sm:mt-8 hover:bg-[#0a5c62] transition-colors">
+            <button onclick="scrollToCards()" class="btn bg-[#0E7A81] text-white py-3 px-6 sm:px-8 rounded-lg mt-6 sm:mt-8 hover:bg-[#0a5c62] transition-colors">
                 View More
             </button>
         </div>
@@ -76,6 +76,46 @@
     </p>
 </section>
 <!-- section 1 end -->
+ <!-- modal -->
+
+ <!-- Modal -->
+<div id="petModal" class="fixed inset-0 bg-black bg-opacity-50  items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 w-11/12 md:w-1/2 lg:w-1/3">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="modalTitle" class="text-xl font-bold">Pet Details</h3>
+            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                &times;
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div id="modalBody" class="space-y-4">
+            <!-- Pet details will be dynamically inserted here -->
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="mt-6 flex justify-end">
+            <button onclick="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Adoption Success Modal -->
+<div id="adoptModal" class="fixed inset-0 bg-black bg-opacity-50  items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 w-11/12 md:w-1/3 text-center">
+        <!-- Logo -->
+        <img src="images/logo.webp" alt="Peddy Logo" class="w-16 h-16 mx-auto mb-4">
+        <!-- Heading -->
+        <h3 class="text-2xl font-bold mb-2">Congrats</h3>
+        <!-- Message -->
+        <p class="text-gray-600 mb-4">Your adoption will be successful in</p>
+        <!-- Countdown -->
+        <p id="countdown" class="text-3xl font-bold text-green-600"></p>
+    </div>
+</div>
+
+
 
 <!-- section 2 start here  -->
 <section id="category" class="flex justify-center items-center gap-5 p-6 ">
@@ -87,22 +127,25 @@
 <!-- section 3 -->
  <section class="flex justify-between mb-3">
    <h3 class="text-xl font-bold ">Best Deal For you</h3>
-   <button class="btn bg-[#0E7A81] text-lg  text-white hover:bg-[#0a5c62] transition-colors">Sort By Price</button>
+   <button id="sort-btn" class="btn bg-[#0E7A81] text-lg  text-white hover:bg-[#0a5c62] transition-colors " onclick="sortByPrice()">Sort By Price</button>
  </section>
 
  <!-- Pet Cards Section -->
-<div class="container mx-auto w-11/12 flex gap-4 mb-5">
-    <!-- Pet Cards Container -->
-    <div id="pet-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
-        <!-- Cards will be dynamically inserted here -->
-    </div>
+ <section id="card-section">
+    <div class="container mx-auto w-11/12 flex flex-col md:flex-row gap-4 mb-5">
+        <!-- Pet Cards Container -->
+        <div id="pet-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
 
-    <!-- Right Sidebar (Kept unchanged) -->
-    <div class="w-1/4 border-2 border-gray-300 p-4 rounded-lg hidden md:block">
-        <h3 class="text-lg font-bold mb-4">Liked Pets</h3>
-        <!-- Liked pets will be added here later -->
+        <!-- Right Sidebar (Like Container) -->
+        <div id="like-container" class="w-full md:w-1/4 border-2 border-gray-300 p-4 rounded-xl md:block">
+            <h3 class="text-lg font-bold mb-4">Liked Pets</h3>
+            <div id="liked-images" class="grid grid-cols-3 gap-2"></div>
+        </div>
     </div>
-</div>
+</section>
+
 
 
 
@@ -164,5 +207,14 @@
     </footer>
     <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        function scrollToCards() {
+            // Get the card-section element and scroll into view
+            document.getElementById('card-section').scrollIntoView({
+                behavior: 'smooth'  // Smooth scroll
+            });
+        }
+    </script>
+    
 </body>
 </html>
