@@ -4,7 +4,7 @@ let filteredPets = [];
 const showSpinner = () => {
     const spinnerContainer = document.getElementById("spinner-container");
     spinnerContainer.classList.remove("hidden");
-    spinnerContainer.classList.add("flex")
+    spinnerContainer.classList.add("flex");
 };
 
 // Function to hide the spinner
@@ -60,7 +60,7 @@ const displayCategories = (data) => {
         const categoryButton = document.createElement('div');
     
         categoryButton.innerHTML = `
-            <button id="${element.category}" onclick="loadPetsByCategory('${element.category}')" class="btn btn-category bg-white md:w-[200px]  border-purple-500 flex items-center gap-2">
+            <button id="${element.category}" onclick="loadPetsByCategory('${element.category}')" class="btn btn-category bg-white md:w-[170px] lg:w-[250px]   border-purple-500 flex items-center gap-2">
                 <img src="${element.category_icon}" alt="${element.category}" class="w-6 h-6"> <!-- Icon -->
                 ${element.category} <!-- Name -->
             </button>
@@ -245,7 +245,7 @@ const displayPets = (pets) => {
 
                 <hr>
                 
-                <div class="flex justify-between items-center mt-4 md:gap-2">
+                <div class="flex justify-between items-center mt-4 md:gap-1 -mx-3 lg:gap-2 ">
                 <button onclick="addLikes('${pet.image}')" class="like-btn text-gray-500 hover:text-blue-500">
                         <i class="far fa-thumbs-up border px-4 py-2 rounded-md hover:bg-gray-100 transition"></i>
                     </button>
